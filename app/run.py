@@ -28,9 +28,18 @@ def tokenize(text):
     clean_tokens = [lemmatizer.lemmatize(tok).lower().strip() for tok in tokens]
     return clean_tokens
 
-# Load data
-database_filepath = os.path.abspath(os.path.join(os.getcwd(), '../data/DisasterResponse.db'))
-engine = create_engine(f'sqlite:///{database_filepath}')
+# Set up database connection
+if os.environ.get('DATABASE_URL'):  # This will check if on Heroku
+    database_url = os.environ['DATABASE_URL']
+else:
+    # Local SQLite database (for local development)
+    database_filepath = os.path.abspath(os.path.join(os.getcwd(), '../data/DisasterResponse.db'))
+    database_url = f'sqlite:///{database_filepath}'
+
+# Create the engine for the database
+engine = create_engine(database_url)
+
+# Load data from the database
 df = pd.read_sql_table('disaster_messages', engine)
 
 # Google Drive model file ID

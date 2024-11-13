@@ -8,3 +8,4 @@ plotly
 requests
 scikit-learn
 SQLAlchemy
+psycopg2-binary
