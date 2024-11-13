@@ -1,0 +1,9 @@
+Flask
+gdown
+joblib
+nltk
+pandas
+plotly
+requests
+scikit-learn
+SQLAlchemy
